@@ -40,7 +40,7 @@ public class Graph {
     }
 
     public void saveGraph() throws IOException {
-        PrintWriter output = new PrintWriter("output.txt");
+        PrintWriter output = new PrintWriter("Pagerank.txt");
         for (Node node : nodes) {
             output.println(
                     node.getIndex() + " " +
@@ -111,36 +111,17 @@ public class Graph {
     }
 
     public void computeRank() {
-        for (Node node : nodes) {
-            double newRank = 0.0;
-            for (Node adjNode : revAdjList.get(node)) {
-                newRank += adjNode.getRank();
+        for (int i = 0; i < 50; i++) {
+            for (Node node : nodes) {
+                double sum = 0.0;
+                for (Node adjNode : revAdjList.get(node)) {
+                    sum += adjNode.getRank() / adjNode.getRevDegree();
+                }
+                double newRank = 0.9 * sum + (0.1 / Math.abs(nodes.size()));
+
+                node.setRank(newRank);
             }
-            newRank = 0.9 * newRank + 0.1 * (1 / Math.abs(nodes.size()));
-            node.setRank(newRank);
         }
-
-//        for (int i = 1; i <= 50; i++) {
-//            for (Node node : nodes) {
-//                double sum = 0.0;
-//                for (Node adjNode : revAdjList.get(node)) {
-//                    double calc = adjNode.getRank() / adjNode.getRevDegree();
-//                    sum += calc;
-//                }
-//                node.setRank(0.9 * sum + (0.1 / Math.abs(nodes.size())));
-//            }
-//        }
-
-//        for (int i = 1; i <= 50; i++) {
-//            double finalRank = 0.0;
-//            for (Node node : nodes) {
-//                double sum = 0.0;
-//                for (Node adjNode : revAdjList.get(node)) {
-//                    double calculation = node.getRank() / adjNode.getRevDegree();
-//                    sum += calculation;
-//                }
-//            }
-//        }
     }
 
     public void adjustRevAdjList() {
