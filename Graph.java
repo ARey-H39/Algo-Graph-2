@@ -10,6 +10,11 @@ public class Graph {
     private final HashMap<Node, List<Node>> adjList = new HashMap<>();
     private final HashMap<Node, List<Node>> revAdjList = new HashMap<>();
 
+    public void initialize() {
+        adjustRevAdjList();
+        initializeRank();
+        computeRank();
+    }
     public void addEdge(int outNode, int inNode) {
         if (!checkNode(outNode)) createNode(outNode);
         if (!checkNode(inNode)) createNode(inNode);

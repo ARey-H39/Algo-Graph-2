@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AlgorithmsGraph {
@@ -15,9 +16,8 @@ public class AlgorithmsGraph {
         }
         inputFile.close();
 
-        graph.adjustRevAdjList();
-        graph.initializeRank();
-        graph.computeRank();
+        graph.initialize();
+
         menu(graph);
     }
 
@@ -38,17 +38,22 @@ public class AlgorithmsGraph {
             System.out.print("How would you like to output the graph?: ");
 
             if (keyboard.hasNextInt()) input = keyboard.nextInt();
-            else keyboard.next();
+            else {
+                keyboard.next();
+                input = 0;
+            }
 
             System.out.println();
 
             switch (input) {
                 case 1:
+                    System.out.println("----------Graph Output----------");
                     graph.displayGraph();
+                    System.out.println("--------------------------------\n");
                     break;
                 case 2:
                     graph.saveGraph();
-                    System.out.println("- Graph saved to Pagerank.txt -");
+                    System.out.println("-- Graph saved to Pagerank.txt --\n");
                     break;
                 case 3:
                     System.exit(0);
