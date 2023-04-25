@@ -147,12 +147,4 @@ public class Graph {
             }
         }
     }
-
-    public void getTotalRank() {
-        double total = 0.0;
-        for (Node node : nodes) {
-            total += node.getRank();
-        }
-        System.out.println("All ranks total to: " + total);
-    }
 }

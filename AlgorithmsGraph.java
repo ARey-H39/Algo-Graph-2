@@ -18,7 +18,6 @@ public class AlgorithmsGraph {
         graph.adjustRevAdjList();
         graph.initializeRank();
         graph.computeRank();
-        graph.getTotalRank();
         menu(graph);
     }
 
